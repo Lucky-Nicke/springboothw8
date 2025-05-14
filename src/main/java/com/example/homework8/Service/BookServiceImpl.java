@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.print.Book;
+import com.example.homework8.entity.Book;
 
 @Service
 @CacheConfig(cacheNames = "book")
@@ -15,6 +15,7 @@ import java.awt.print.Book;
 public class BookServiceImpl implements BookService {
     @Autowired
     private BookRepository bookRepository;
+
     @Cacheable(key = "#id")
     public Book findById(Integer id){
         return bookRepository.findById(id).get();
@@ -29,6 +30,7 @@ public class BookServiceImpl implements BookService {
 
     @Cacheable(key = "#id")
     public void delById(Integer id){
-        bookRepository.deleteBy(id);
+        // 修改为 deleteById
+        bookRepository.deleteById(id);
     }
 }
